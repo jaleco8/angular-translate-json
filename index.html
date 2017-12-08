@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body ng-app="app">
+
+<div ng-controller="LangCtrl">
+
+    <p translate="QUESTION"></p>
+
+    <button ng-click="changeLang('en')" translate="BUTTON_LANG_EN"></button>
+    <button ng-click="changeLang('es')" translate="BUTTON_LANG_ES"></button>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-cookies.js"></script>
+<script src="https://cdn.rawgit.com/angular-translate/bower-angular-translate/2.16.0/angular-translate.js"></script>
+<script src="https://cdn.rawgit.com/angular-translate/bower-angular-translate-loader-static-files/2.16.0/angular-translate-loader-static-files.js"></script>
+
+<script>
+    var app = angular.module('app', ['ngCookies', 'pascalprecht.translate']);
+    app.config(function ($translateProvider) {
+        $translateProvider.useStaticFilesLoader({
+            prefix: 'data/',
+            suffix: '.json'
+        });;
+        $translateProvider.preferredLanguage('en');
+    });
+    app.controller('LangCtrl', function ($scope, $translate) {
+        $scope.changeLang = function (key) {
+            $translate.use(key);
+        };
+    });
+</script>
+</body>
+</html>
